@@ -11,17 +11,14 @@ display.setStatusBar(display.HiddenStatusBar)
 local backgroundImage = display.newImageRect("Images/background.png", 2048,1536)
 
 --displays the Yellow Girl
-local yellowGirl
-local blueGirl
 local yellowGirl = display.newImageRect("Images/yellowGirl.png",140,150)
-local yellowGirlWidth = yellowGirl.Width 
-local yellowGirlHeight = yellowGirl.Height
+local yellowGirlWidth = yellowGirl.width
+local yellowGirlHeight = yellowGirl.height
 
 -- displays the Blue Girl
 local blueGirl = display.newImageRect("Images/blueGirl.png", 150,180)
-local blueGirlWidth = blueGirl.Width
-local blueGirlHeight = blueGirl.Height
-
+local blueGirlWidth = blueGirl.width
+local blueGirlHeight = blueGirl.height
 
 --my boolean variables to keep track of which object I touched first
 local alreadyTouchedyellowGirl = false
@@ -82,6 +79,6 @@ end
 
 
 --add the respective listeners to each object
-blueGirl:addEventListener("touch", BlueGirlListener)
+blueGirl:addEventListener("touch", blueGirlListener)
 yellowGirl:addEventListener("touch", yellowGirlListener)
 
