@@ -13,9 +13,9 @@ local backgroundImage = display.newImageRect("Images/background.png", 2048,1536)
 --displays the Yellow Girl
 local yellowGirl
 local blueGirl
-local yellowGirl = display.newImageRect("Images/yellowGirl.png",140,150)
-local yellowGirlWidth = yellowGirl.Width 
-local yellowGirlHeight = yellowGirl.Height
+local YellowGirl = display.newImageRect("Images/yellowGirl.png",140,150)
+local YellowGirlWidth = YellowGirl.Width 
+local YellowGirlHeight = YellowGirl.Height
 
 -- displays the Blue Girl
 local blueGirl = display.newImageRect("Images/blueGirl.png", 150,180)
@@ -79,6 +79,23 @@ if (touch.phase == "began")	then
     alreadyTouchedyellowGirl = false
   end
 end
+
+-- Completion listener function
+local function narrationFinished( event )
+    print( "Narration Finished on channel", event.channel )
+    if ( event.completed ) then
+        print( "Narration completed playback naturally" )
+    else
+        print( "Narration was stopped before completion" )
+    end
+end
+ 
+-- Load two audio streams and one sound
+local laserSound = audio.loadSound( "Correct Answer Sound Effect.mp3" )
+ 
+-- Play the laser on any available channel
+local laserChannel = audio.play( laserSound )
+
 
 
 --add the respective listeners to each object
