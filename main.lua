@@ -20,9 +20,14 @@ local blueGirl = display.newImageRect("Images/blueGirl.png", 150,180)
 local blueGirlWidth = blueGirl.width
 local blueGirlHeight = blueGirl.height
 
+local brownGirl = display.newImageRect("Images/girl5.png",170, 200)
+local brownGirlWidth = brownGirl.width
+local brownGirlHeight = brownGirl.height
+
 --my boolean variables to keep track of which object I touched first
 local alreadyTouchedyellowGirl = false
 local alreadyTouchedblueGirl = false
+local alreadyTouchedbrownGirl = false
 
 --set the initial x and y position of myImage
 yellowGirl.x = 400
@@ -38,7 +43,7 @@ blueGirl.y = 400
 local function blueGirlListener(touch)
 
    if(touch.phase == "began") then
-     if (alreadyTouchedyellowGirl == false ) then 
+     if ( (alreadyTouchedyellowGirl == false ) and (alreadyTouchedbrownGirl == false) ) then 
        alreadyTouchedblueGirl = true
      end 
    end
@@ -51,6 +56,7 @@ local function blueGirlListener(touch)
   if (touch.phase == "ended") then 
      alreadyTouchedblueGirl = false
      alreadyTouchedyellowGirl = false
+     alreadyTouchedbrownGirl = false
   end 
 end
 
@@ -61,7 +67,7 @@ end
 -- Description: when blue girl is touched, move her
 local function yellowGirlListener(touch)
 if (touch.phase == "began")	then
-	if (alreadytouchedblueGirl == false ) then
+	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedbrownGirl == false) ) then
 	 alreadyTouchedyellowGirl = true 
 	 end
     end
@@ -77,8 +83,32 @@ if (touch.phase == "began")	then
   end
 end
 
+-- Function: YellowGirlListener
+-- Input: touch listener
+-- output: none
+-- Description: when blue girl is touched, move her
+local function brownGirlListener(touch)
+if (touch.phase == "began")	then
+	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedyellowGirl) ) then
+	 alreadyTouchedbrownGirl = true 
+	 end
+    end
+
+   if( (touch.phase == "moved") and (alreadyTouchedbrownGirl == true) ) then 
+	brownGirl.x = touch.x
+	brownGirl.y = touch.y
+   end
+
+  if (touch.phase == "ended") then
+    alreadyTouchedblueGirl = false
+    alreadyTouchedyellowGirl = false
+    alreadtTouchedbrownGirl = false
+  end
+end
+
 
 --add the respective listeners to each object
 blueGirl:addEventListener("touch", blueGirlListener)
 yellowGirl:addEventListener("touch", yellowGirlListener)
+brownGirl:addEventListener("touch", brownGirlListener)
 
