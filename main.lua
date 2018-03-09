@@ -17,15 +17,23 @@ local YellowGirl = display.newImageRect("Images/yellowGirl.png",140,150)
 local YellowGirlWidth = YellowGirl.Width 
 local YellowGirlHeight = YellowGirl.Height
 
+local yellowGirl = display.newImageRect("Images/yellowGirl.png",140,150)
+local yellowGirlWidth = yellowGirl.width
+local yellowGirlHeight = yellowGirl.height
+
 -- displays the Blue Girl
 local blueGirl = display.newImageRect("Images/blueGirl.png", 150,180)
-local blueGirlWidth = blueGirl.Width
-local blueGirlHeight = blueGirl.Height
+local blueGirlWidth = blueGirl.width
+local blueGirlHeight = blueGirl.height
 
+local brownGirl = display.newImageRect("Images/girl5.png",170, 200)
+local brownGirlWidth = brownGirl.width
+local brownGirlHeight = brownGirl.height
 
 --my boolean variables to keep track of which object I touched first
 local alreadyTouchedyellowGirl = false
 local alreadyTouchedblueGirl = false
+local alreadyTouchedbrownGirl = false
 
 --set the initial x and y position of myImage
 yellowGirl.x = 400
@@ -39,14 +47,13 @@ blueGirl.y = 400
 -- Output: none
 -- Description: when blue girl is touched, move her
 local function blueGirlListener(touch)
-
-   if(touch.phase == "began") then
-     if (alreadyTouchedyellowGirl == false ) then 
+if(touch.phase == "began") then
+     if ( (alreadyTouchedyellowGirl == false ) and (alreadyTouchedbrownGirl == false) ) then 
        alreadyTouchedblueGirl = true
      end 
    end
 
- if ( (touch.phase == "moved") and (alreadyTouchedBlueGirl == true) ) then
+ if ( (touch.phase == "moved") and (alreadyTouchedblueGirl == true) ) then
  	 blueGirl.x = touch.x
  	 blueGirl.y = touch.y
  end
@@ -54,6 +61,7 @@ local function blueGirlListener(touch)
   if (touch.phase == "ended") then 
      alreadyTouchedblueGirl = false
      alreadyTouchedyellowGirl = false
+     alreadyTouchedbrownGirl = false
   end 
 end
 
@@ -63,8 +71,9 @@ end
 -- output: none
 -- Description: when blue girl is touched, move her
 local function yellowGirlListener(touch)
+
 if (touch.phase == "began")	then
-	if (alreadytouchedblueGirl == false ) then
+	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedbrownGirl == false) ) then
 	 alreadyTouchedyellowGirl = true 
 	 end
     end
@@ -77,28 +86,39 @@ if (touch.phase == "began")	then
   if (touch.phase == "ended") then
     alreadyTouchedblueGirl = false
     alreadyTouchedyellowGirl = false
+    alreadyTouchedbrownGirl = false
   end
 end
 
--- Completion listener function
-local function narrationFinished( event )
-    print( "Narration Finished on channel", event.channel )
-    if ( event.completed ) then
-        print( "Narration completed playback naturally" )
-    else
-        print( "Narration was stopped before completion" )
+-- Function: YellowGirlListener
+-- Input: touch listener
+-- output: none
+-- Description: when blue girl is touched, move her
+local function brownGirlListener(touch)
+if (touch.phase == "began")	then
+	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedyellowGirl == false) ) then
+	 alreadyTouchedbrownGirl = true 
+	 end
     end
+
+   if( (touch.phase == "moved") and (alreadyTouchedbrownGirl == true) ) then 
+	brownGirl.x = touch.x
+	brownGirl.y = touch.y
+   end
+
+  if (touch.phase == "ended") then
+    alreadyTouchedblueGirl = false
+    alreadyTouchedyellowGirl = false
+    alreadtTouchedbrownGirl = false
+  end
 end
+
  
--- Load two audio streams and one sound
-local laserSound = audio.loadSound( "Correct Answer Sound Effect.mp3" )
- 
--- Play the laser on any available channel
-local laserChannel = audio.play( laserSound )
 
 
 
 --add the respective listeners to each object
-blueGirl:addEventListener("touch", BlueGirlListener)
+blueGirl:addEventListener("touch", blueGirlListener)
 yellowGirl:addEventListener("touch", yellowGirlListener)
+brownGirl:addEventListener("touch", brownGirlListener)
 
