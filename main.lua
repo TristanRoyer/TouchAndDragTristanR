@@ -41,14 +41,13 @@ blueGirl.y = 400
 -- Output: none
 -- Description: when blue girl is touched, move her
 local function blueGirlListener(touch)
-
-   if(touch.phase == "began") then
+if(touch.phase == "began") then
      if ( (alreadyTouchedyellowGirl == false ) and (alreadyTouchedbrownGirl == false) ) then 
        alreadyTouchedblueGirl = true
      end 
    end
 
- if ( (touch.phase == "moved") and (alreadyTouchedBlueGirl == true) ) then
+ if ( (touch.phase == "moved") and (alreadyTouchedblueGirl == true) ) then
  	 blueGirl.x = touch.x
  	 blueGirl.y = touch.y
  end
@@ -66,6 +65,7 @@ end
 -- output: none
 -- Description: when blue girl is touched, move her
 local function yellowGirlListener(touch)
+
 if (touch.phase == "began")	then
 	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedbrownGirl == false) ) then
 	 alreadyTouchedyellowGirl = true 
@@ -80,6 +80,7 @@ if (touch.phase == "began")	then
   if (touch.phase == "ended") then
     alreadyTouchedblueGirl = false
     alreadyTouchedyellowGirl = false
+    alreadyTouchedbrownGirl = false
   end
 end
 
@@ -89,7 +90,7 @@ end
 -- Description: when blue girl is touched, move her
 local function brownGirlListener(touch)
 if (touch.phase == "began")	then
-	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedyellowGirl) ) then
+	if ( (alreadyTouchedblueGirl == false ) and (alreadyTouchedyellowGirl == false) ) then
 	 alreadyTouchedbrownGirl = true 
 	 end
     end
