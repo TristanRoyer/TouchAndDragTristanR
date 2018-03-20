@@ -35,6 +35,11 @@ local alreadyTouchedyellowGirl = false
 local alreadyTouchedblueGirl = false
 local alreadyTouchedbrownGirl = false
 
+-- adds sounds
+local FreeMusic = audio.loadSound("Sounds/bensound-memories.mp3")
+local FreeMusicChannel
+FreeMusicChannel = audio.play(FreeMusic)
+
 --set the initial x and y position of myImage
 yellowGirl.x = 400
 yellowGirl.y = 500
